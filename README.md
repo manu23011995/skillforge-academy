@@ -256,6 +256,251 @@ This project is licensed under the MIT License.
 
 For support, email support@skillforgeacademy.com or use the chat widget on the website.
 
+## 🧪 Testing
+
+### Test Strategy Overview
+
+The skillforge-academy project uses a comprehensive testing approach to ensure reliability and quality across all features.
+
+### Testing Tools
+
+- **Vitest 3.2.4** - Unit testing framework
+- **React Testing Library** - Component testing
+- **Testing Library Jest DOM** - DOM testing utilities
+- **Playwright/Cypress** - E2E testing (recommended for future)
+
+### Test Structure
+
+```
+src/test/
+├── unit/
+│   ├── components/
+│   │   ├── chat/
+│   │   │   ├── ChatWidget.test.tsx
+│   │   │   ├── ChatBubble.test.tsx
+│   │   │   ├── ChatInput.test.tsx
+│   │   │   ├── QuickChips.test.tsx
+│   │   │   └── AssociateModal.test.tsx
+│   │   ├── ui/
+│   │   │   └── Button.test.tsx
+│   │   └── pages/
+│   │       └── Index.test.tsx
+│   ├── hooks/
+│   │   └── useConversationHistory.test.ts
+│   └── lib/
+│       └── utils.test.ts
+├── integration/
+│   ├── chat-flow.test.tsx
+│   └── navigation.test.tsx
+└── e2e/
+    ├── user-journey.spec.ts
+    └── mobile-experience.spec.ts
+```
+
+### Test Coverage Areas
+
+#### 1. Page-Level Tests (Critical)
+
+**Index Page**
+- ✓ Rendering all sections (Navbar, Hero, Courses, Features, Testimonials, CTA, Footer)
+- ✓ Chat widget integration and floating button behavior
+- ✓ Modal open/close functionality
+- ✓ Responsive design on different screen sizes
+- ✓ Smooth scrolling navigation to sections
+
+#### 2. Chat Component Tests (High Priority)
+
+**ChatWidget**
+- ✓ Initial state and welcome message display
+- ✓ Message flow (user → AI response)
+- ✓ localStorage persistence across page refreshes
+- ✓ Quick chips rendering and query triggering
+- ✓ Chat clear functionality and localStorage updates
+- ✓ Typing indicator during AI "thinking" state
+- ✓ Fuzzy matching for typo tolerance
+- ✓ Error handling for API failures
+
+**ChatBubble**
+- ✓ User vs Bot styling with correct CSS classes
+- ✓ Timestamp rendering when provided
+- ✓ Accessibility (ARIA labels, keyboard navigation)
+- ✓ Long message text wrapping and overflow handling
+
+**ChatInput**
+- ✓ Input validation (empty message handling)
+- ✓ Character limit enforcement (2000 characters)
+- ✓ Keyboard shortcuts (Enter to send, Shift+Enter for new line)
+- ✓ Send button disabled state when empty
+- ✓ Auto-resize textarea height adjustment
+
+**QuickChips**
+- ✓ All default chips rendering
+- ✓ Custom queries triggered correctly
+- ✓ Associate chip conditional rendering
+- ✓ Disabled state handling
+
+**AssociateModal**
+- ✓ Connection flow (Connecting → Online state)
+- ✓ Message sending (user input → agent response)
+- ✓ Agent typing simulation
+- ✓ Modal close behavior and state reset
+- ✓ Auto-scroll to latest messages
+
+#### 3. UI Component Tests (Medium Priority)
+
+**Button Component**
+- ✓ All button variants (default, outline, ghost, hero)
+- ✓ Different size options
+- ✓ Disabled state handling
+- ✓ Loading state (if implemented)
+
+**Navbar Component**
+- ✓ Responsive mobile hamburger menu
+- ✓ Active page highlighting
+- ✓ Smooth scroll navigation
+
+**Hero Section**
+- ✓ Fade-in animation triggers
+- ✓ CTA button click handlers
+- ✓ Statistics display rendering
+
+#### 4. Integration Tests (Important)
+
+**Chat Flow Integration**
+- ✓ Complete conversation flow (ask → respond → follow-up)
+- ✓ Context memory across messages
+- ✓ History loading from localStorage
+- ✓ Cross-tab persistence
+
+**Navigation Integration**
+- ✓ Nav link clicks → smooth scroll to section
+- ✓ Chat widget accessibility during scroll
+- ✓ Mobile menu → section navigation
+
+#### 5. Utility Function Tests
+
+**Utils (lib/utils.ts)**
+- ✓ cn() function for class name merging
+- ✓ Other helper functions
+
+#### 6. Hook Tests
+
+**useConversationHistory**
+- ✓ Create new conversation
+- ✓ Add messages to conversation
+- ✓ Load conversation by ID
+- ✓ Delete conversations
+- ✓ localStorage persistence
+
+#### 7. Accessibility Tests (Important)
+
+- ✓ Keyboard navigation for all interactive elements
+- ✓ Screen reader compatibility (ARIA labels and roles)
+- ✓ Focus management (modal focus traps)
+- ✓ Color contrast (WCAG compliance)
+- ✓ Semantic HTML and heading hierarchy
+
+#### 8. Performance Tests (Optional)
+
+- ✓ Large chat history performance (100+ messages)
+- ✓ Hero section image load time
+- ✓ Animation performance (60fps smooth)
+
+#### 9. E2E Tests (Playwright/Cypress)
+
+**User Journeys**
+- ✓ New user: lands → explores courses → uses chat → enrolls
+- ✓ Returning user: loads chat history → continues conversation
+- ✓ Mobile user: navigates site → uses chat
+
+#### 10. Edge Cases (Critical)
+
+**Chat Widget**
+- ✓ Empty chat history
+- ✓ Very long messages (near character limit)
+- ✓ Rapid message sending (spam prevention)
+- ✓ Network errors during message sending
+- ✓ localStorage quota exceeded
+- ✓ Browser without localStorage support
+
+**General**
+- ✓ Slow network conditions
+- ✓ Missing images/assets
+- ✓ JavaScript disabled
+
+### Testing Priority Phases
+
+#### Phase 1: Critical Path (Start Here)
+1. ChatWidget basic functionality
+2. ChatInput send/receive
+3. ChatBubble rendering
+4. Index page rendering
+5. localStorage persistence
+
+#### Phase 2: Important Features
+6. QuickChips functionality
+7. AssociateModal flow
+8. Navigation and scrolling
+9. Responsive design
+10. Accessibility basics
+
+#### Phase 3: Enhancement
+11. Integration tests
+12. Error handling
+13. Performance tests
+14. E2E tests
+15. Edge cases
+
+### Running Tests
+
+```bash
+# Run all tests
+npm run test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test -- --coverage
+```
+
+### Test Best Practices
+
+1. **Mock External Dependencies**: API calls, localStorage
+2. **Test Isolation**: Each test should be independent
+3. **Descriptive Names**: Test names should explain what they test
+4. **Arrange-Act-Assert**: Clear test structure
+5. **Coverage Goals**: Aim for 80%+ code coverage
+6. **CI/CD Integration**: Run tests on every commit
+
+### Test Example Structure
+
+```typescript
+describe("ComponentName", () => {
+  beforeEach(() => {
+    // Setup before each test
+  });
+
+  it("should do something specific", () => {
+    // Arrange
+    render(<Component />);
+    
+    // Act
+    fireEvent.click(screen.getByRole("button"));
+    
+    // Assert
+    expect(screen.getByText("Expected")).toBeInTheDocument();
+  });
+});
+```
+
+### Coverage Goals
+
+- **Unit Tests**: 80%+ coverage
+- **Component Tests**: 90%+ coverage
+- **Integration Tests**: Key user flows covered
+- **E2E Tests**: Critical paths covered
+
 ---
 
 **Built with ❤️ for SkillForge Academy**

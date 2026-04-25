@@ -13,3 +13,13 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: () => {},
   }),
 });
+
+// Mock scrollTo for jsdom
+Element.prototype.scrollTo = function () {
+  // Mock implementation
+};
+
+// Mock scrollIntoView for jsdom
+Element.prototype.scrollIntoView = function () {
+  // Mock implementation
+};
