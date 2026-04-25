@@ -1,7 +1,8 @@
 # SkillForge Academy
 
 A modern, responsive website for an online tech academy featuring course listings, features, testimonials, and an integrated AI-powered chat assistant.
-<img width="1864" height="2669" alt="image" src="https://github.com/user-attachments/assets/e2b12ecb-4494-40fd-bceb-7dbbbe129741" />
+<img width="1763" height="3150" alt="image" src="https://github.com/user-attachments/assets/dcfd8a71-1519-46b0-bc54-9ca913155834" />
+
 <img width="503" height="638" alt="image" src="https://github.com/user-attachments/assets/6c3ba647-6626-4e26-9cc7-98c0151d789c" />
 
 
